@@ -22,6 +22,11 @@ app.use(function (req, res, next) {
 
   if (corsWhiteList.includes(req.headers.origin)) {
     res.header("Access-Control-Allow-Origin", req.headers.origin);
+    res.header(
+      "Access-Control-Allow-Methods",
+      "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+    );
+    res.header("Access-Control-Allow-Headers", "Content-Type");
 
     // ROUTES
     app.use("/api/orders", orderRoutes);
