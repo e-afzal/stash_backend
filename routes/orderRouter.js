@@ -12,7 +12,7 @@ import {
 } from "../controllers/orderController.js";
 
 router.post("/", createOrder);
-router.get("/", findUserOrders);
+router.post("/get-orders", findUserOrders);
 router.get("/:id", findOrderById);
 router.delete("/", deleteAllOrders);
 router.delete("/:id", deleteOrderById);
