@@ -14,8 +14,21 @@ config();
 // Connect to MongoDB
 connectDB();
 
-// ROUTES
-app.use("/api/orders", orderRoutes);
+app.use(function (req, res, next) {
+  const corsWhiteList = [
+    "http://localhost:3000",
+    "https://stash-ead.vercel.app",
+  ];
+
+  if (corsWhiteList.includes(req.headers.origin)) {
+    res.header("Access-Control-Allow-Origin", req.headers.origin);
+
+    // ROUTES
+    app.use("/api/orders", orderRoutes);
+  } else {
+    return res.status(403).send("Access denied");
+  }
+});
 
 // SERVER LISTENING
 const PORT = process.env.PORT || 5000;
