@@ -25,6 +25,7 @@ app.use(function (req, res, next) {
 
     // ROUTES
     app.use("/api/orders", orderRoutes);
+    next();
   } else {
     return res.status(403).send("Access denied");
   }
