@@ -1,15 +1,17 @@
 import express from "express";
-const app = express();
-// Read ENV file variables
 import { config } from "dotenv";
-config();
-// Body Parser
-app.use(express.json());
-
-// ROUTES
 import orderRoutes from "./routes/orderRouter.js";
 import connectDB from "./dbConnect.js";
 
+// Express App
+const app = express();
+
+// Body Parser
+app.use(express.json());
+// Read ENV file variables
+config();
+
+// Connect to MongoDB
 connectDB();
 
 // ROUTES
