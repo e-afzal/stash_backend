@@ -16,7 +16,7 @@ const findUserOrders = async (req, res) => {
   try {
     const ordersFound = await Order.find({
       "customer_details.email": email,
-    }).select("-__v -updatedAt -createdAt");
+    }).select("-__v -updatedAt");
 
     if (!ordersFound || ordersFound.length === 0)
       return res.json({
