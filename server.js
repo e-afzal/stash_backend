@@ -14,6 +14,7 @@ config();
 // Connect to MongoDB
 connectDB();
 
+//! CORS SETTINGS
 app.use(function (req, res, next) {
   const corsWhiteList = [
     "http://localhost:3000",
@@ -35,6 +36,9 @@ app.use(function (req, res, next) {
     return res.status(403).send("Access denied");
   }
 });
+
+// ROUTES
+// app.use("/api/orders", orderRoutes);
 
 // SERVER LISTENING
 const PORT = process.env.PORT || 5000;
