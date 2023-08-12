@@ -30,7 +30,9 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Content-Type");
 
     // ROUTES
+    app.use("/", (req, res) => res.send("API LIVE"));
     app.use("/api/orders", orderRoutes);
+
     next();
   } else {
     return res.status(403).send("Access denied");
@@ -38,6 +40,7 @@ app.use(function (req, res, next) {
 });
 
 // ROUTES
+// app.use("/", (req, res) => res.send("API LIVE"));
 // app.use("/api/orders", orderRoutes);
 
 // SERVER LISTENING
