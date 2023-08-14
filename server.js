@@ -15,33 +15,44 @@ config();
 connectDB();
 
 //! CORS SETTINGS
+// app.use(function (req, res, next) {
+//   const corsWhiteList = [
+//     "http://localhost:3000",
+//     "https://stash-ead.vercel.app",
+//   ];
+
+//   if (corsWhiteList.includes(req.headers.origin)) {
+//     res.header("Access-Control-Allow-Origin", req.headers.origin);
+//     res.header(
+//       "Access-Control-Allow-Methods",
+//       "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+//     );
+//     res.header("Access-Control-Allow-Headers", "Content-Type");
+
+//     // ROUTES
+//     app.use("/", (req, res) => res.send("API LIVE"));
+//     app.use("/api/orders", orderRoutes);
+
+//     next();
+//   } else {
+//     return res.status(403).send("Access denied");
+//   }
+// });
+
 app.use(function (req, res, next) {
-  const corsWhiteList = [
-    "http://localhost:3000",
-    "https://stash-ead.vercel.app",
-  ];
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.header("Access-Control-Allow-Headers", "Content-Type");
 
-  if (corsWhiteList.includes(req.headers.origin)) {
-    res.header("Access-Control-Allow-Origin", req.headers.origin);
-    res.header(
-      "Access-Control-Allow-Methods",
-      "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-    );
-    res.header("Access-Control-Allow-Headers", "Content-Type");
+  // ROUTES
+  app.use("/status", (req, res) => res.send("API LIVE"));
+  app.use("/api/orders", orderRoutes);
 
-    // ROUTES
-    app.use("/", (req, res) => res.send("API LIVE"));
-    app.use("/api/orders", orderRoutes);
-
-    next();
-  } else {
-    return res.status(403).send("Access denied");
-  }
+  next();
 });
-
-// ROUTES
-// app.use("/", (req, res) => res.send("API LIVE"));
-// app.use("/api/orders", orderRoutes);
 
 // SERVER LISTENING
 const PORT = process.env.PORT || 5000;
