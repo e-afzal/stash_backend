@@ -19,9 +19,12 @@ const findUserOrders = async (req, res) => {
     }).select("-__v -updatedAt");
 
     if (!ordersFound || ordersFound.length === 0)
+      //* We send 'ordersFound' as an EMPTY ARRAY for it to be used during FRONTEND JSX conditional rendering
+      //* i.e. if ordersFound is empty, show no order found. IF not empty, show the orders on frontend.
       return res.json({
         message: "Order(s) not found",
         status: "fail",
+        orders: ordersFound,
       });
 
     return res.json({ status: "success", orders: ordersFound });
